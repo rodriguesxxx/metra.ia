@@ -3,6 +3,15 @@
  * ao OpenAPI do backend quando ele for disponibilizado.
  */
 export type AttentionLevel = "normal" | "attention" | "critical";
+export type UserRole = "pedagogical" | "coordinator" | "teacher" | "administrator";
+export type CourseModality = "high_school" | "technical" | "subsequent_technical" | "other";
+
+export interface SyncStatus {
+  status: "never" | "success" | "error" | "syncing";
+  lastSuccessfulSyncAt?: string;
+  attemptedAt?: string;
+  message?: string;
+}
 
 export interface ClassSummary {
   id: string;
@@ -13,6 +22,10 @@ export interface ClassSummary {
   averageGrade?: number;
   attendanceRate?: number;
   attentionStudentCount?: number;
+  courseId?: string;
+  modality?: CourseModality;
+  councilEligible?: boolean;
+  sync?: SyncStatus;
 }
 
 export interface StudentListItem {
@@ -22,6 +35,10 @@ export interface StudentListItem {
   attentionLevel: AttentionLevel;
   averageGrade?: number;
   attendanceRate?: number;
+  isInRecovery?: boolean;
+  courseName?: string;
+  className?: string;
+  photoUrl?: string;
 }
 
 export interface PageResult<T> {
@@ -37,8 +54,37 @@ export interface ClassDetails extends ClassSummary {
 
 export interface PedagogicalRecordInput {
   studentId: string;
-  category: "performance" | "attendance" | "behavior" | "guidance";
+  category?: string;
   note: string;
+  subjectId?: string;
+  period?: string;
+}
+
+export interface PedagogicalRecord {
+  id: string;
+  studentId: string;
+  teacherId: string;
+  teacherName: string;
+  createdAt: string;
+  category?: string;
+  categoryLabel?: string;
+  subjectId?: string;
+  subjectName?: string;
+  period?: string;
+  note: string;
+}
+
+export interface GradeHistoryPoint {
+  period: string;
+  averageGrade: number;
+}
+
+export interface SubjectPerformance {
+  id?: string;
+  name: string;
+  grade?: number;
+  attendanceRate?: number;
+  isInRecovery?: boolean;
 }
 
 export interface DashboardSummary {

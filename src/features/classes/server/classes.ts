@@ -10,12 +10,16 @@ export async function getClasses() {
 }
 
 export async function getClassDetails(id: string) {
-  if (isMockDataEnabled()) return mockClassDetails(id);
+  if (isMockDataEnabled()) {
+    const details = mockClassDetails(id);
+    if (!details) throw new Error("Turma não encontrada.");
+    return details;
+  }
   return apiFetch<ClassDetails>(`/classes/${encodeURIComponent(id)}`);
 }
 
 export async function getClassStudents(id: string, query?: string) {
-  if (isMockDataEnabled()) return mockClassStudents(query);
+  if (isMockDataEnabled()) return mockClassStudents(id, query);
   const search = new URLSearchParams();
   if (query) search.set("q", query);
   return apiFetch<PageResult<StudentListItem>>(`/classes/${encodeURIComponent(id)}/students?${search}`);

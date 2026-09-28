@@ -1,6 +1,6 @@
 import "server-only";
 import { apiFetch } from "@/lib/api";
-import type { AttentionLevel } from "@/lib/contracts";
+import type { AttentionLevel, CourseModality, SyncStatus } from "@/lib/contracts";
 import { isMockDataEnabled } from "@/lib/data-source";
 import { mockClassCouncilReport } from "@/mocks/education";
 
@@ -8,7 +8,12 @@ import { mockClassCouncilReport } from "@/mocks/education";
 export interface ClassCouncilReport {
   classId: string;
   className?: string;
+  courseId?: string;
+  courseName?: string;
   termLabel?: string;
+  modality?: CourseModality;
+  councilEligible?: boolean;
+  sync?: SyncStatus;
   summary: { studentCount?: number; averageGrade?: number; attendanceRate?: number; attentionStudentCount?: number };
   priorities: Array<{ studentId: string; studentName: string; attentionLevel: AttentionLevel; reason?: string; averageGrade?: number; attendanceRate?: number; recentChange?: number }>;
   trends: Array<{ label: string; value?: number; change?: number; direction?: "improving" | "stable" | "worsening"; context?: string }>;
