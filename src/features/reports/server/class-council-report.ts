@@ -15,6 +15,7 @@ export interface ClassCouncilReport {
   councilEligible?: boolean;
   sync?: SyncStatus;
   summary: { studentCount?: number; averageGrade?: number; attendanceRate?: number; attentionStudentCount?: number };
+  subjects?: Array<{ name: string; averageGrade?: number; attendanceRate?: number }>;
   priorities: Array<{ studentId: string; studentName: string; attentionLevel: AttentionLevel; reason?: string; averageGrade?: number; attendanceRate?: number; recentChange?: number }>;
   trends: Array<{ label: string; value?: number; change?: number; direction?: "improving" | "stable" | "worsening"; context?: string }>;
   referrals: Array<{ id: string; title: string; description?: string; status?: "pending" | "in_progress" | "completed" }>;

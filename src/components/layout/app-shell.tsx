@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { BarChart3, BookOpenCheck, ClipboardPenLine, GraduationCap, Menu, Moon, Settings, Sun, UserRound, UsersRound, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { BarChart3, BookOpenCheck, ClipboardPenLine, GraduationCap, Menu, Settings, Sun, UserRound, UsersRound, X } from "lucide-react";
 import type { UserRole } from "@/lib/contracts";
 
 const navigation: Array<{ href: string; label: string; icon: typeof BarChart3; roles?: UserRole[] }> = [
@@ -24,10 +24,9 @@ export function AppShell({ children, user }: { children: React.ReactNode; user?:
   const pathname = usePathname();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
-  const [darkTheme, setDarkTheme] = useState(false);
+  useEffect(() => { document.documentElement.dataset.theme = "light"; }, []);
   const closeMobileNav = () => setMobileNavOpen(false);
   const closeAccount = () => setAccountOpen(false);
-  const toggleTheme = () => { const nextTheme = !darkTheme; setDarkTheme(nextTheme); document.documentElement.dataset.theme = nextTheme ? "dark" : "light"; window.localStorage.setItem("metra-theme", nextTheme ? "dark" : "light"); };
   const visibleNavigation = navigation.filter((item) => !item.roles || (user && item.roles.includes(user.role)));
   const canCreateRecord = user?.role === "teacher" || user?.role === "pedagogical";
   return <div className="shell selection:bg-emerald-200/60">
@@ -38,6 +37,6 @@ export function AppShell({ children, user }: { children: React.ReactNode; user?:
       <div className="topbar-actions">{canCreateRecord && <Link className="quick-action" href="/acompanhamentos"><ClipboardPenLine aria-hidden size={16} /><span>Novo registro</span></Link>}<button className="profile-trigger" type="button" onClick={() => setAccountOpen(true)} aria-haspopup="dialog" aria-expanded={accountOpen} aria-label="Abrir menu da conta"><div className="hidden text-right sm:block"><strong>{user ? user.name : "Sessão indisponível"}</strong><div className="context-label">{user ? roleLabels[user.role] : "Acesso restrito"}</div></div><span className="avatar transition-transform duration-300 hover:rotate-6" aria-hidden>{user ? user.name.slice(0, 1).toUpperCase() : "?"}</span></button></div>
     </header>
     <main id="main-content">{children}</main>
-    {accountOpen && <div className="account-layer" role="presentation"><button className="account-backdrop" type="button" aria-label="Fechar menu da conta" onClick={closeAccount} /><aside className="account-panel" role="dialog" aria-modal="true" aria-label="Menu da conta"><div className="account-panel-header"><div><span className="context-label">Sua conta</span><h2>{user ? user.name : "Sessão indisponível"}</h2></div><button className="account-close" type="button" onClick={closeAccount} aria-label="Fechar menu"><X size={18} /></button></div><div className="account-person"><span className="account-avatar" aria-hidden>{user ? user.name.slice(0, 1).toUpperCase() : "?"}</span><div><strong>{user ? roleLabels[user.role] : "Acesso restrito"}</strong><p>{user ? "Sua sessão está ativa" : "Conecte a API para acessar sua conta"}</p></div></div><nav className="account-links" aria-label="Opções da conta">{canCreateRecord && <Link href="/acompanhamentos" onClick={closeAccount}><ClipboardPenLine aria-hidden size={17} />Acompanhamentos</Link>}{user?.role === "administrator" && <Link href="/configuracoes" onClick={closeAccount}><Settings aria-hidden size={17} />Configurações</Link>}<Link href="/perfil" onClick={closeAccount}><UserRound aria-hidden size={17} />Perfil</Link></nav><div className="theme-toggle"><div><strong>Tema da interface</strong><p>{darkTheme ? "Escuro" : "Claro"}</p></div><button type="button" onClick={toggleTheme} aria-pressed={darkTheme} className="theme-button">{darkTheme ? <Moon aria-hidden size={17} /> : <Sun aria-hidden size={17} />}<span>{darkTheme ? "Escuro" : "Claro"}</span></button></div></aside></div>}
+    {accountOpen && <div className="account-layer" role="presentation"><button className="account-backdrop" type="button" aria-label="Fechar menu da conta" onClick={closeAccount} /><aside className="account-panel" role="dialog" aria-modal="true" aria-label="Menu da conta"><div className="account-panel-header"><div><span className="context-label">Sua conta</span><h2>{user ? user.name : "Sessão indisponível"}</h2></div><button className="account-close" type="button" onClick={closeAccount} aria-label="Fechar menu"><X size={18} /></button></div><div className="account-person"><span className="account-avatar" aria-hidden>{user ? user.name.slice(0, 1).toUpperCase() : "?"}</span><div><strong>{user ? roleLabels[user.role] : "Acesso restrito"}</strong><p>{user ? "Sua sessão está ativa" : "Conecte a API para acessar sua conta"}</p></div></div><nav className="account-links" aria-label="Opções da conta">{canCreateRecord && <Link href="/acompanhamentos" onClick={closeAccount}><ClipboardPenLine aria-hidden size={17} />Acompanhamentos</Link>}{user?.role === "administrator" && <Link href="/configuracoes" onClick={closeAccount}><Settings aria-hidden size={17} />Configurações</Link>}<Link href="/perfil" onClick={closeAccount}><UserRound aria-hidden size={17} />Perfil</Link></nav><div className="theme-toggle"><div><strong>Tema da interface</strong><p>Claro</p></div><button type="button" disabled aria-label="Tema claro; alternância de tema indisponível" className="theme-button"><Sun aria-hidden size={17} /><span>Claro</span></button></div></aside></div>}
   </div>;
 }

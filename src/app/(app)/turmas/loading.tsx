@@ -1,1 +1,1 @@
-export default function Loading() { return <><div className="skeleton" style={{ height: 52, width: 200, marginBottom: 24 }} /><div className="skeleton" style={{ height: 380 }} /></>; }
+export default function Loading() { return <div aria-label="Carregando turmas" aria-busy="true"><div className="loading-heading" /><div className="card section"><div className="skeleton" style={{ height: 42, width: 220, marginBottom: 20 }} />{Array.from({ length: 4 }, (_, index) => <div className="skeleton loading-row" key={index} />)}</div></div>; }
