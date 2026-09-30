@@ -1,4 +1,4 @@
-import type { ClassSummary } from "@/lib/contracts";
+import type { ClassSummary } from "@/domains/classes/contracts";
 import { formatGrade, formatPercent } from "@/lib/formatters";
 
 type Point = { id: string; name: string; grade?: number; attendance?: number };

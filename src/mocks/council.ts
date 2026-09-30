@@ -1,5 +1,5 @@
-import type { ClassSummary } from "@/lib/contracts";
-import type { CouncilReportData } from "@/features/reports/council-data";
+import type { ClassSummary } from "@/domains/classes/contracts";
+import type { CouncilReportData } from "@/domains/councils/contracts";
 
 export const councilDemoClasses: ClassSummary[] = [
   {

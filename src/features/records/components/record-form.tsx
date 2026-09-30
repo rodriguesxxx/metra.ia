@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { pedagogicalRecordSchema, toPedagogicalRecordInput, type PedagogicalRecordFormValues } from "@/features/records/record-schema";
+import { pedagogicalRecordSchema, toPedagogicalRecordInput, type PedagogicalRecordFormValues } from "@/domains/pedagogy/record-schema";
 
 export function RecordForm({ studentId }: { studentId?: string }) {
   const [status, setStatus] = useState<"idle" | "success" | "demo" | "error">("idle");

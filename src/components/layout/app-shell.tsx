@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BarChart3, BookOpenCheck, ClipboardPenLine, GraduationCap, Menu, Settings, Sun, UserRound, UsersRound, X } from "lucide-react";
-import type { UserRole } from "@/lib/contracts";
+import type { UserRole } from "@/domains/identity/contracts";
 
 const navigation: Array<{ href: string; label: string; icon: typeof BarChart3; roles?: UserRole[] }> = [
   { href: "/dashboard", label: "Visão geral", icon: BarChart3 },

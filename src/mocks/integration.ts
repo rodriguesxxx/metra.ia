@@ -1,4 +1,4 @@
-import type { CajuiClassSnapshot, CajuiSyncResult } from "../features/integrations/server/cajui";
+import type { CajuiClassSnapshot, CajuiSyncResult } from "@/services/contracts/cajui";
 
 const snapshots = new Map<string, CajuiClassSnapshot>();
 const statuses = new Map<string, CajuiSyncResult>();

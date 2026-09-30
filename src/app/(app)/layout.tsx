@@ -1,6 +1,6 @@
 import { AppShell } from "@/components/layout/app-shell";
 import { redirect } from "next/navigation";
-import { getSession } from "@/features/auth/server/session";
+import { getSession } from "@/services/server/session";
 
 export const dynamic = "force-dynamic";
 

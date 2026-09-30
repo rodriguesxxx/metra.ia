@@ -1,4 +1,5 @@
-import type { GradeHistoryPoint, PedagogicalRecord, SubjectPerformance } from "@/lib/contracts";
+import type { GradeHistoryPoint, SubjectPerformance } from "@/domains/academics/contracts";
+import type { PedagogicalRecord } from "@/domains/pedagogy/contracts";
 
 interface MockStudentSupplement {
   courseName: string;

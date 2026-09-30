@@ -1,7 +1,9 @@
+import { LoadingRows } from "@/components/shared/loading-rows";
+
 export default function Loading() {
   return <div aria-label="Carregando métricas" aria-busy="true">
     <div className="loading-heading" />
     <div className="metrics dashboard-metrics">{Array.from({ length: 4 }, (_, index) => <div className="card metric" key={index}><div className="skeleton" style={{ height: 13, width: "62%" }} /><div className="skeleton" style={{ height: 34, width: "38%", marginTop: 16 }} /></div>)}</div>
-    <div className="card section"><div className="skeleton" style={{ height: 18, width: "22%", marginBottom: 20 }} />{Array.from({ length: 3 }, (_, index) => <div className="skeleton loading-row" key={index} />)}</div>
+    <div className="card section"><div className="skeleton" style={{ height: 18, width: "22%", marginBottom: 20 }} /><LoadingRows count={3} /></div>
   </div>;
 }
