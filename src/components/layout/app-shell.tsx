@@ -30,7 +30,7 @@ export function AppShell({ children, user }: { children: React.ReactNode; user?:
   const toggleTheme = () => { const nextTheme = !darkTheme; setDarkTheme(nextTheme); document.documentElement.dataset.theme = nextTheme ? "dark" : "light"; window.localStorage.setItem("metra-theme", nextTheme ? "dark" : "light"); };
   const visibleNavigation = navigation.filter((item) => !item.roles || (user && item.roles.includes(user.role)));
   const canCreateRecord = user?.role === "teacher" || user?.role === "pedagogical";
-  return <div className="shell selection:bg-violet/20">
+  return <div className="shell selection:bg-emerald-200/60">
     <header className="topbar">
       <Link href="/dashboard" className="brand"><span className="brand-mark"><GraduationCap size={20} /></span><span>Métrica</span></Link>
       <button className="icon-button" type="button" onClick={() => setMobileNavOpen((open) => !open)} aria-expanded={mobileNavOpen} aria-controls="main-navigation" aria-label={mobileNavOpen ? "Fechar navegação" : "Abrir navegação"}><Menu size={20} /></button>
